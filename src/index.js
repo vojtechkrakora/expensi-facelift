@@ -4,8 +4,8 @@ import './index.css';
 import $ from 'jquery';
 
 class App extends React.Component {
-    constructor() {
-        super()
+    constructor(props) {
+        super(props);
         this.state = {
             data: [],
             query: "",
@@ -28,7 +28,7 @@ class App extends React.Component {
             }.bind(this),
             error: function (jqXHR) {
                 console.log(jqXHR);
-            }.bind(this)
+            }
         })
     }
 
@@ -44,7 +44,7 @@ class App extends React.Component {
             }.bind(this),
             error: function (jqXHR) {
                 console.log(jqXHR);
-            }.bind(this)
+            }
         })
     }
 
@@ -60,7 +60,7 @@ class App extends React.Component {
             }.bind(this),
             error: function (jqXHR) {
                 console.log(jqXHR);
-            }.bind(this)
+            }
         })
     }
 
@@ -76,7 +76,7 @@ class App extends React.Component {
             }.bind(this),
             error: function (jqXHR) {
                 console.log(jqXHR);
-            }.bind(this)
+            }
         })
     }
 
@@ -94,8 +94,8 @@ class App extends React.Component {
             }.bind(this),
             error: function (jqXHR) {
                 console.log(jqXHR);
-            }.bind(this)
-        })
+            }
+        });
 
         this.getMax(query);
         this.getMin(query);
@@ -110,6 +110,7 @@ class App extends React.Component {
                     <tr>
                         <th>Maximum</th>
                         <th>Minimum</th>
+                        <th>Average</th>
                         <th>Amount</th>
                     </tr>
                     </thead>
@@ -117,6 +118,7 @@ class App extends React.Component {
                     <tr>
                         <td>{this.state.max}</td>
                         <td>{this.state.min}</td>
+                        <td>{isNaN(this.state.amount) ? '' : (this.state.amount/this.state.data.length)}</td>
                         <td>{this.state.amount}</td>
                     </tr>
                     </tbody>
@@ -152,4 +154,4 @@ class App extends React.Component {
     }
 }
 
-ReactDOM.render(<App/>, document.getElementById('root'))
+ReactDOM.render(<App/>, document.getElementById('root'));
