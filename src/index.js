@@ -10,7 +10,8 @@ class App extends React.Component {
             data: [],
             query: "",
             max: 0.0,
-            min: 0.0
+            min: 0.0,
+            amount: 0.0
         }
 
     }
@@ -63,6 +64,22 @@ class App extends React.Component {
         })
     }
 
+    getAmount(query) {
+        $.ajax({
+            url: "http://localhost:9090/records/amount/" + query,
+            type: "GET",
+            dataType: 'json',
+            ContentType: 'application/json',
+            success: function (data) {
+
+                this.setState({amount: data.amountByNote});
+            }.bind(this),
+            error: function (jqXHR) {
+                console.log(jqXHR);
+            }.bind(this)
+        })
+    }
+
     handleInputChange = event => {
         const query = event.target.value;
 
@@ -82,6 +99,7 @@ class App extends React.Component {
 
         this.getMax(query);
         this.getMin(query);
+        this.getAmount(query);
     };
 
     render() {
@@ -92,12 +110,14 @@ class App extends React.Component {
                     <tr>
                         <th>Maximum</th>
                         <th>Minimum</th>
+                        <th>Amount</th>
                     </tr>
                     </thead>
                     <tbody>
                     <tr>
                         <td>{this.state.max}</td>
                         <td>{this.state.min}</td>
+                        <td>{this.state.amount}</td>
                     </tr>
                     </tbody>
                 </table>
