@@ -140,7 +140,10 @@ class App extends React.Component {
                         return (
                             <tr key={key}>
                                 <td>{item.id}</td>
-                                <td>{item.Datum}</td>
+                                <td>{
+                                    Intl.DateTimeFormat('en-GB', {year: 'numeric', month: '2-digit',day: '2-digit'}).format(new Date(item.Datum))
+                                }
+                                </td>
                                 <td>{item.Objem}</td>
                                 <td>{item.Měna}</td>
                                 <td>{item.Poznámka}</td>
