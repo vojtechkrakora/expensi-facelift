@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import NumberFormat from 'react-number-format'
 import './index.css';
 import $ from 'jquery';
 
@@ -116,10 +117,10 @@ class App extends React.Component {
                     </thead>
                     <tbody>
                     <tr>
-                        <td>{this.state.max}</td>
-                        <td>{this.state.min}</td>
-                        <td>{isNaN(this.state.amount) ? '' : (this.state.amount/this.state.data.length)}</td>
-                        <td>{this.state.amount}</td>
+                        <td>{<NumberFormat value={this.state.max} displayType={'text'} thousandSeparator={' '} suffix={' [CZK]'}/>}</td>
+                        <td>{<NumberFormat value={this.state.min} displayType={'text'} thousandSeparator={' '} suffix={' [CZK]'}/>}</td>
+                        <td>{isNaN(this.state.amount) ? '' : <NumberFormat value={(this.state.amount/this.state.data.length)} displayType={'text'} thousandSeparator={' '} suffix={' [CZK]'}/>}</td>
+                        <td>{<NumberFormat value={this.state.amount} displayType={'text'} thousandSeparator={' '} suffix={' [CZK]'}/>}</td>
                     </tr>
                     </tbody>
                 </table>
@@ -144,7 +145,7 @@ class App extends React.Component {
                                     Intl.DateTimeFormat('en-GB', {year: 'numeric', month: '2-digit',day: '2-digit'}).format(new Date(item.Datum))
                                 }
                                 </td>
-                                <td>{item.Objem}</td>
+                                <td>{<NumberFormat value={item.Objem} displayType={'text'} thousandSeparator={' '}/>}</td>
                                 <td>{item.Měna}</td>
                                 <td>{item.Poznámka}</td>
                             </tr>
